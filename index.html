@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>The Framework That Gets Women Married in One Year (Without Luck or Hustle)</title>
+
   <style>
     :root{
       --gold:#c9a227;
@@ -23,6 +24,7 @@
       --box:#f8f8fc;
       --edge:#e5e6ee;
     }
+
     *{box-sizing:border-box}
     body{
       margin:0;background:var(--bg);color:var(--ink);
@@ -35,6 +37,39 @@
       padding:22px 20px 10px;
       max-width:1000px;width:100%;
     }
+
+    /* BLACK TIMER (HIGH VISIBILITY) */
+    .timer-box{
+      margin:12px 0 10px;
+      padding:12px 18px;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      background:#111;
+      color:#fff;
+      border:1px solid rgba(255,255,255,.18);
+      font-size:14px;
+      font-weight:900;
+      box-shadow:0 10px 26px rgba(0,0,0,.22);
+    }
+    .timer-label{
+      text-transform:uppercase;
+      letter-spacing:.9px;
+      font-size:11px;
+      opacity:.9;
+    }
+    #countdown{
+      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-weight:900;
+      font-size:15px;
+      letter-spacing:.6px;
+      padding:2px 8px;
+      border-radius:10px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+    }
+
     .hero-title{
       margin:10px 0 10px;
       font-size:34px;line-height:1.15;font-weight:900;letter-spacing:.2px;
@@ -42,31 +77,6 @@
     .hero-sub{
       margin:6px 0 0;color:var(--muted);font-size:16px;max-width:820px;
       margin-left:auto;margin-right:auto;
-    }
-
-    /* timer pill */
-    .timer-box{
-      margin:12px 0 8px;
-      padding:10px 14px;
-      border-radius:999px;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      background:rgba(255,255,255,.92);
-      border:1px solid rgba(124,92,255,.28);
-      font-size:13px;
-      font-weight:700;
-      color:var(--purple-dark);
-      box-shadow:0 6px 18px rgba(0,0,0,.04);
-    }
-    .timer-label{
-      text-transform:uppercase;
-      letter-spacing:.7px;
-      font-size:11px;
-      opacity:.9;
-    }
-    #countdown{
-      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
 
     /* main wrap */
@@ -119,6 +129,7 @@
       background:linear-gradient(90deg,#6848e8,#e03f8f);
     }
     .reveal-btn:active{transform:translateY(0px);box-shadow:0 10px 18px rgba(0,0,0,.10);}
+    .reveal-btn[disabled]{opacity:.55;cursor:not-allowed;transform:none}
 
     /* offers hidden */
     .hidden-offers{display:none;}
@@ -229,6 +240,36 @@
     }
     .btn.platinum:hover{background:linear-gradient(90deg,#6848e8,#e03f8f);box-shadow:0 12px 28px rgba(124,92,255,.34), 0 12px 26px rgba(255,77,166,.24);}
 
+    /* testimonials section styles (MISSING BEFORE -> FIXED) */
+    .testimonials{
+      width:100%;
+      max-width:1000px;
+      margin:22px auto 0;
+      padding:0 0 10px;
+    }
+    .t-wrap{
+      background:linear-gradient(135deg,#ffe7f2 0%, #fff0f7 45%, #ffe0f0 100%);
+      border:1px solid #ffd1e6;
+      border-radius:20px;
+      box-shadow:0 12px 30px rgba(255,77,166,.18), 0 6px 14px rgba(0,0,0,.05);
+      padding:22px 20px;
+    }
+    .t-head{text-align:center;margin:0 0 14px 0;}
+    .t-head h2{margin:0;font-size:26px;line-height:1.2;color:#b82b6f;font-weight:900;letter-spacing:.2px;}
+    .t-head p{margin:8px 0 0;color:#7a2152;font-size:15px;}
+    .t-cta{text-align:center;margin:14px 0 16px;}
+    .t-cta a{
+      display:inline-block;background:var(--pink);color:#fff;font-weight:900;
+      text-decoration:none;padding:12px 18px;border-radius:999px;
+      box-shadow:0 8px 18px rgba(255,77,166,.25);
+    }
+    .t-cta a:hover{background:var(--pink-deep)}
+    .t-frame{
+      position:relative;border-radius:14px;overflow:hidden;border:1px solid #ffcfe5;background:#fff;
+    }
+    .t-frame::before{content:"";display:block;padding-top:70vh;max-height:820px;min-height:520px;}
+    .t-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
     footer{
       text-align:center;
       padding:18px 20px 26px;
@@ -236,8 +277,8 @@
     }
   </style>
 </head>
-<body>
 
+<body>
   <header>
     <div class="timer-box">
       <span class="timer-label">Offer closes in</span>
@@ -273,7 +314,7 @@
       <button id="reveal-btn" class="reveal-btn">Show me how 💗</button>
     </section>
 
-    <!-- OFFERS (HIDDEN UNTIL CLICK) -->
+    <!-- OFFERS + TESTIMONIALS (HIDDEN UNTIL CLICK) -->
     <div id="offers-wrapper" class="hidden-offers">
 
       <div class="pink-intro">
@@ -282,7 +323,6 @@
       </div>
 
       <section class="tiers" id="cta-live">
-
         <!-- Gold -->
         <div class="card">
           <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
@@ -346,36 +386,36 @@
             </a>
           </div>
         </div>
-
       </section>
 
-       <!-- Testimonials -->
-    <section id="testimonials" class="testimonials" aria-labelledby="t-title">
-      <div class="t-wrap">
-        <div class="t-head">
-          <h2 id="t-title">✨ Testimonials & Stories of Success</h2>
-          <p>Real women. Real results. Let their journeys inspire your next step.</p>
-        </div>
+      <!-- Embedded Testimonials -->
+      <section id="testimonials" class="testimonials" aria-labelledby="t-title">
+        <div class="t-wrap">
+          <div class="t-head">
+            <h2 id="t-title">✨ Testimonials & Stories of Success</h2>
+            <p>Real women. Real results. Let their journeys inspire your next step.</p>
+          </div>
 
-        <div class="t-cta">
-          <a href="https://feminine-dating-results.start.page/" target="_blank" rel="noopener">Open Full Stories in New Tab →</a>
-        </div>
+          <div class="t-cta">
+            <a href="https://feminine-dating-results.start.page/" target="_blank" rel="noopener">Open Full Stories in New Tab →</a>
+          </div>
 
-        <div class="t-frame">
-          <iframe
-            src="https://feminine-dating-results.start.page/"
-            title="Testimonials & Stories of Success"
-            loading="lazy"
-            allowtransparency="true"
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-        </div>
+          <div class="t-frame">
+            <iframe
+              src="https://feminine-dating-results.start.page/"
+              title="Testimonials & Stories of Success"
+              loading="lazy"
+              allowtransparency="true"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
 
-        <div class="t-cta" style="margin-top:14px">
-          <a href="https://feminine-dating-results.start.page/" target="_blank" rel="noopener">View All Success Stories →</a>
+          <div class="t-cta" style="margin-top:14px">
+            <a href="https://feminine-dating-results.start.page/" target="_blank" rel="noopener">View All Success Stories →</a>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
     </div>
   </div>
 
@@ -385,8 +425,7 @@
 
   <script src="https://player.vimeo.com/api/player.js"></script>
   <script>
-    // ====== FIXED EXPIRY TIMER (20 Dec 23:59 CET) ======
-    // CET in December = UTC+1, so 23:59 CET = 22:59 UTC.
+    // 20 December 2025, 23:59 CET = 22:59 UTC
     const EXPIRY_UTC_MS = Date.UTC(2025, 11, 20, 22, 59, 0);
 
     const $count = document.getElementById('countdown');
@@ -418,8 +457,6 @@
         $overlay.style.display = 'flex';
         $offersWrapper.style.display = 'none';
         $revealBtn.disabled = true;
-        $revealBtn.style.opacity = '.6';
-        $revealBtn.style.cursor = 'not-allowed';
 
         if(player){
           player.pause().catch(()=>{}).finally(()=>{ if(player.unload) player.unload(); });
@@ -429,7 +466,6 @@
       }
     }
 
-    // reveal offers on click
     $revealBtn.addEventListener('click', () => {
       if(Date.now() > EXPIRY_UTC_MS) return;
       $offersWrapper.style.display = 'block';
