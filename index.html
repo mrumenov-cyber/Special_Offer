@@ -32,8 +32,8 @@
 
     header{
       text-align:center;
-      padding:22px 20px 12px;
-      max-width:1100px;width:100%;
+      padding:22px 20px 10px;
+      max-width:1000px;width:100%;
     }
     .hero-title{
       margin:10px 0 10px;
@@ -44,9 +44,9 @@
       margin-left:auto;margin-right:auto;
     }
 
-    /* fixed timer pill */
+    /* timer pill */
     .timer-box{
-      margin:14px 0 4px;
+      margin:12px 0 8px;
       padding:10px 14px;
       border-radius:999px;
       display:inline-flex;
@@ -65,23 +65,18 @@
       font-size:11px;
       opacity:.9;
     }
-    #countdown{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
+    #countdown{
+      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
 
-    /* layout: video left / offers right */
-    .content{
+    /* main wrap */
+    .wrap{
       width:100%;
-      max-width:1100px;
-      padding:14px 20px 10px;
-      display:grid;
-      grid-template-columns:1.15fr .85fr;
-      gap:18px;
-      align-items:start;
-    }
-    @media (max-width: 980px){
-      .content{grid-template-columns:1fr;gap:16px;}
+      max-width:1000px;
+      padding:10px 20px 30px;
     }
 
-    /* video same style */
+    /* video */
     .video-wrapper{
       width:100%;
       position:relative;
@@ -90,33 +85,57 @@
       border:1px solid var(--edge);
       box-shadow:0 6px 22px rgba(0,0,0,.06);
       background:#fff;
+      margin-top:14px;
     }
-    /* your embed is 75% ratio */
     .video-wrapper::before{content:"";display:block;padding-top:75%;}
-    .video-wrapper iframe{
-      position:absolute;top:0;left:0;width:100%;height:100%;border:0;
-    }
+    .video-wrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+
     .expired{
       position:absolute;inset:0;display:none;align-items:center;justify-content:center;
       background:rgba(0,0,0,.82);backdrop-filter:blur(6px);color:#fff;text-align:center;padding:20px
     }
 
-    /* offers column */
-    .offers-col{
-      display:flex;
-      flex-direction:column;
-      gap:14px;
+    /* reveal button */
+    .reveal-wrap{
+      text-align:center;
+      margin:18px 0 10px;
     }
-
-    .pink-intro{
+    .reveal-btn{
+      background:linear-gradient(90deg,#7c5cff,#ff4da6);
+      color:#fff;
+      border:none;
+      padding:16px 32px;
       border-radius:18px;
-      padding:16px 16px;
+      font-size:18px;
+      font-weight:900;
+      cursor:pointer;
+      letter-spacing:.3px;
+      box-shadow:0 12px 26px rgba(124,92,255,.22), 0 12px 22px rgba(255,77,166,.18);
+      transition:transform .12s, box-shadow .2s, background .2s;
+    }
+    .reveal-btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 16px 32px rgba(124,92,255,.30), 0 16px 28px rgba(255,77,166,.24);
+      background:linear-gradient(90deg,#6848e8,#e03f8f);
+    }
+    .reveal-btn:active{transform:translateY(0px);box-shadow:0 10px 18px rgba(0,0,0,.10);}
+
+    /* offers hidden */
+    .hidden-offers{display:none;}
+
+    /* intro */
+    .pink-intro{
+      max-width:920px;
+      margin:14px auto 18px;
+      border-radius:18px;
+      padding:18px 18px;
       background:linear-gradient(180deg,#fff1fa 0%, #ffe1f4 100%);
       border:1px solid #ffb7dd;
       box-shadow:0 6px 18px rgba(255,77,166,.14);
       line-height:1.55;
       color:var(--ink);
-      font-size:15px;
+      font-size:16px;
+      text-align:center;
     }
     .pink-intro .kicker{
       display:inline-block;
@@ -126,20 +145,29 @@
       letter-spacing:.2px;
     }
 
+    /* offer cards */
+    .tiers{
+      width:100%;
+      max-width:1000px;
+      margin:0 auto 10px;
+      display:grid;
+      gap:18px;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      align-items:stretch;
+    }
+
     .card{
       border-radius:16px;
-      padding:18px 18px 16px;
+      padding:22px 22px 18px;
       border:1px solid var(--edge);
       background:var(--box);
-      display:flex;flex-direction:column;gap:10px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
       box-shadow:0 8px 24px rgba(0,0,0,.05);
+      height:100%;
     }
-    .card h2{
-      margin:0;
-      font-size:20px;
-      font-weight:900;
-      line-height:1.2;
-    }
+    .card h2{margin:0;font-size:22px;font-weight:900;line-height:1.2}
     .subtitle{color:var(--muted);margin:0;font-size:14px;line-height:1.45}
 
     .why-box{
@@ -153,21 +181,34 @@
     .features ul{margin:8px 0 0 18px;padding:0}
     .features li{margin:7px 0}
 
+    .badge{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+      background:#fff;
+      border:1px solid rgba(124,92,255,.25);
+      color:var(--purple-dark);
+    }
+
     .cta-row{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      margin-top:4px;
+      margin-top:6px;
     }
     .btn{
       display:inline-block;
       background:linear-gradient(90deg,#7c5cff,#6848e8);
       color:#fff;
-      padding:12px 16px;
+      padding:14px 18px;
       border-radius:12px;
       text-decoration:none;
       font-weight:900;
-      font-size:15px;
+      font-size:16px;
       box-shadow:0 8px 20px rgba(124,92,255,.25);
       transition:transform .1s, box-shadow .2s, background .2s;
     }
@@ -188,33 +229,6 @@
     }
     .btn.platinum:hover{background:linear-gradient(90deg,#6848e8,#e03f8f);box-shadow:0 12px 28px rgba(124,92,255,.34), 0 12px 26px rgba(255,77,166,.24);}
 
-    .badge{
-      display:inline-block;
-      padding:6px 10px;
-      border-radius:999px;
-      font-size:11px;
-      font-weight:900;
-      letter-spacing:.6px;
-      text-transform:uppercase;
-      background:#fff;
-      border:1px solid rgba(124,92,255,.25);
-      color:var(--purple-dark);
-    }
-
-    /* purple/pink price box */
-    .price-box{
-      background:linear-gradient(135deg,#7c5cff 0%, #ff4da6 100%);
-      border-radius:16px;
-      padding:14px 14px;
-      color:#fff;
-      box-shadow:0 12px 28px rgba(124,92,255,.30), 0 8px 18px rgba(255,77,166,.20);
-      margin-top:2px;
-    }
-    .price-box .title{font-weight:900;font-size:15px;margin-bottom:6px}
-    .price-box .value{font-size:13px;opacity:.92}
-    .price-box .today{margin-top:6px;font-size:18px;font-weight:900}
-    .price-box .fine{margin-top:6px;font-size:12px;opacity:.85}
-
     footer{
       text-align:center;
       padding:18px 20px 26px;
@@ -230,11 +244,11 @@
       <span id="countdown">Loading…</span>
     </div>
     <h1 class="hero-title">The Framework That Gets Women Married in One Year (Without Luck or Hustle)</h1>
-    <p class="hero-sub">Watch the training, then choose the support level that matches how quickly you want results 💗</p>
+    <p class="hero-sub">Watch the training, then click below to see the program options 💗</p>
   </header>
 
-  <main class="content">
-    <!-- VIDEO (LEFT) -->
+  <div class="wrap">
+    <!-- VIDEO -->
     <section class="video-wrapper">
       <iframe
         id="vimeo-iframe"
@@ -254,108 +268,88 @@
       </div>
     </section>
 
-    <!-- OFFERS (RIGHT) -->
-    <aside class="offers-col" id="offers-col">
+    <!-- BUTTON -->
+    <section class="reveal-wrap">
+      <button id="reveal-btn" class="reveal-btn">Show me how 💗</button>
+    </section>
+
+    <!-- OFFERS (HIDDEN UNTIL CLICK) -->
+    <div id="offers-wrapper" class="hidden-offers">
+
       <div class="pink-intro">
         <div class="kicker">Get Married in 1 Year</div><br/>
         is my highest-execution container where me and my happily married team help you move with clarity, date smarter, and vet men in real time — so you don’t waste months on the wrong ones again.
       </div>
 
-      <!-- VIP / TIER 2 PREMIUM offer (your €2,222 value -> €1,111) -->
-      <div class="card" id="vip-offer">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
-          <h2 style="margin:0;">VIP — Tier 2 Premium</h2>
-          <span class="badge">Limited-time</span>
-        </div>
-        <p class="subtitle">Premium access, high-touch mentoring, and powerful momentum — for women ready to be fully supported and accelerated.</p>
+      <section class="tiers" id="cta-live">
 
-        <div class="price-box" id="price-box">
-          <div class="title">Limited-time invitation 💗</div>
-          <div class="value">Full value: <span style="text-decoration:line-through;font-weight:800;">€2,222</span></div>
-          <div class="today">Today: €1,111 (until the timer hits zero)</div>
-          <div class="fine">When the countdown ends, this offer closes automatically.</div>
-        </div>
+        <!-- Gold -->
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+            <h2 style="margin:0;">Get Married in 1 Year – Gold</h2>
+            <span class="badge">3 months</span>
+          </div>
 
-        <div class="why-box" style="border-color:#d5ccff;">
-          <strong>What you receive inside VIP:</strong>
-          <ul style="margin:8px 0 0 18px">
-            <li>✨ Three months inside an intimate group VIP container</li>
-            <li>💬 24/5 Telegram support from me and my married team</li>
-            <li>🎥 7 LIVE Zoom calls (every second week)</li>
-            <li>❤️ We vet men for you — real-time clarity & protection</li>
-            <li>🗓 We begin: <strong>22.01.2026</strong></li>
-          </ul>
-        </div>
+          <p class="subtitle">Premium access for women ready to be supported, guided, and accelerated into their dream marriage.</p>
 
-        <div class="cta-row">
-          <a class="btn gold" href="https://feminine-dating.thrivecart.com/get-married-in-1-year-tier-2/" target="_blank" rel="noopener">
-            €1,111 Pay in Full →
-          </a>
-          <a class="btn" href="https://feminine-dating.thrivecart.com/get-married-in-1-year-tier-2/" target="_blank" rel="noopener">
-            4 × €333 →
-          </a>
-        </div>
-      </div>
+          <div class="why-box" style="border-color:#f1d88a;">
+            <strong>What you receive inside (Gold):</strong>
+            <ul style="margin:8px 0 0 18px">
+              <li>✨ 3 months inside an intimate VIP container</li>
+              <li>💬 24/5 Telegram support from me + married team</li>
+              <li>🎥 7 LIVE Zoom calls (every second week)</li>
+              <li>❤️ We vet men for you in real time</li>
+              <li>🌸 Core Feminine Dating frameworks & scripts</li>
+            </ul>
+          </div>
 
-      <!-- Gold + Platinum cards (from your “upstairs” code) -->
-      <div class="card" id="gold-offer">
-        <h2>Get Married in 1 Year – Gold</h2>
-        <p class="subtitle">3-month premium access for women ready to be fully supported, guided, and accelerated into their dream marriage.</p>
-
-        <div class="why-box" style="border-color:#f1d88a;">
-          <strong>What you receive inside (Gold):</strong>
-          <ul style="margin:8px 0 0 18px">
-            <li>✨ 3 months inside an intimate VIP container</li>
-            <li>💬 24/5 Telegram support from me + married team</li>
-            <li>🎥 7 LIVE Zoom calls (every second week)</li>
-            <li>❤️ We vet men for you in real time</li>
-            <li>🌸 Core Feminine Dating frameworks & scripts</li>
-          </ul>
+          <div class="cta-row">
+            <a class="btn gold" href="https://feminine-dating.thrivecart.com/get-married-t1/" target="_blank" rel="noopener">
+              €2,222 Pay in Full →
+            </a>
+            <a class="btn" href="https://feminine-dating.thrivecart.com/get-married-t1/" target="_blank" rel="noopener">
+              4 × €644 Monthly →
+            </a>
+          </div>
         </div>
 
-        <div class="cta-row">
-          <a class="btn gold" href="https://feminine-dating.thrivecart.com/get-married-t1/" target="_blank" rel="noopener">
-            €2,222 Pay in Full →
-          </a>
-          <a class="btn" href="https://feminine-dating.thrivecart.com/get-married-t1/" target="_blank" rel="noopener">
-            4 × €644 Monthly →
-          </a>
-        </div>
-      </div>
+        <!-- Platinum -->
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+            <h2 style="margin:0;">Get Married in 1 Year – Platinum</h2>
+            <span class="badge">Special offer</span>
+          </div>
 
-      <div class="card" id="platinum-offer">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
-          <h2 style="margin:0;">Get Married in 1 Year – Platinum</h2>
-          <span class="badge">Special offer</span>
-        </div>
-        <p class="subtitle">6 months of premium, high-touch support — double the time, depth, and integration for women committed to a 2026 marriage.</p>
-        <p style="margin:0;color:var(--muted);font-size:13px;">
-          Special price until <strong>20.12. at 23:59 CET</strong> – instead of €4,444 or 6 × €822.
-        </p>
+          <p class="subtitle">6 months of premium, high-touch support — double the time, depth, and integration for women committed to a 2026 marriage.</p>
 
-        <div class="why-box" style="border-color:#d5ccff;">
-          <strong>What you receive inside (Platinum):</strong>
-          <ul style="margin:8px 0 0 18px">
-            <li>✨ 6 months inside the VIP container</li>
-            <li>💬 24/5 Telegram support from me + married team</li>
-            <li>🎥 Extended LIVE coaching across a longer season</li>
-            <li>❤️ Vetting men over time (patterns, not moments)</li>
-            <li>🌸 Access to 10 Feminine Dating frameworks</li>
-          </ul>
+          <p style="margin:0;color:var(--muted);font-size:13px;">
+            Special price until <strong>20.12. at 23:59 CET</strong> – instead of €4,444 or 6 × €822.
+          </p>
+
+          <div class="why-box" style="border-color:#d5ccff;">
+            <strong>What you receive inside (Platinum):</strong>
+            <ul style="margin:8px 0 0 18px">
+              <li>✨ 6 months inside the VIP container</li>
+              <li>💬 24/5 Telegram support from me + married team</li>
+              <li>🎥 Extended LIVE coaching across a longer season</li>
+              <li>❤️ Vetting men over time (patterns, not moments)</li>
+              <li>🌸 Access to 10 Feminine Dating frameworks</li>
+            </ul>
+          </div>
+
+          <div class="cta-row">
+            <a class="btn platinum" href="https://feminine-dating.thrivecart.com/get-married-p6/" target="_blank" rel="noopener">
+              €3,444 Pay in Full →
+            </a>
+            <a class="btn" href="https://feminine-dating.thrivecart.com/get-married-p6/" target="_blank" rel="noopener">
+              6 × €644 Monthly →
+            </a>
+          </div>
         </div>
 
-        <div class="cta-row">
-          <a class="btn platinum" href="https://feminine-dating.thrivecart.com/get-married-p6/" target="_blank" rel="noopener">
-            €3,444 Pay in Full →
-          </a>
-          <a class="btn" href="https://feminine-dating.thrivecart.com/get-married-p6/" target="_blank" rel="noopener">
-            6 × €644 Monthly →
-          </a>
-        </div>
-      </div>
-
-    </aside>
-  </main>
+      </section>
+    </div>
+  </div>
 
   <footer>
     Offer closes on 20 December at 23:59 CET 💜
@@ -365,12 +359,12 @@
   <script>
     // ====== FIXED EXPIRY TIMER (20 Dec 23:59 CET) ======
     // CET in December = UTC+1, so 23:59 CET = 22:59 UTC.
-    const EXPIRY_UTC_MS = Date.UTC(2025, 11, 20, 22, 59, 0); // YYYY, MM(0-based), DD, HH, MM, SS
+    const EXPIRY_UTC_MS = Date.UTC(2025, 11, 20, 22, 59, 0);
 
     const $count = document.getElementById('countdown');
     const $overlay = document.getElementById('expired-overlay');
-    const $offersCol = document.getElementById('offers-col');
-    const $priceBox = document.getElementById('price-box');
+    const $offersWrapper = document.getElementById('offers-wrapper');
+    const $revealBtn = document.getElementById('reveal-btn');
     const $iframe = document.getElementById('vimeo-iframe');
 
     let player;
@@ -393,15 +387,11 @@
 
       if(expired){
         $count.textContent = '00d 00h 00m 00s';
-        if($overlay) $overlay.style.display = 'flex';
-        if($offersCol) $offersCol.style.display = 'none';
-
-        if($priceBox){
-          $priceBox.innerHTML = `
-            <div style="font-weight:900;font-size:15px;margin-bottom:6px">This invitation has closed 💜</div>
-            <div style="font-size:13px;opacity:.95">Full value of this VIP offer is €2,222.</div>
-          `;
-        }
+        $overlay.style.display = 'flex';
+        $offersWrapper.style.display = 'none';
+        $revealBtn.disabled = true;
+        $revealBtn.style.opacity = '.6';
+        $revealBtn.style.cursor = 'not-allowed';
 
         if(player){
           player.pause().catch(()=>{}).finally(()=>{ if(player.unload) player.unload(); });
@@ -410,6 +400,13 @@
         $count.textContent = formatRemaining(remaining);
       }
     }
+
+    // reveal offers on click
+    $revealBtn.addEventListener('click', () => {
+      if(Date.now() > EXPIRY_UTC_MS) return;
+      $offersWrapper.style.display = 'block';
+      window.scrollTo({ top: $offersWrapper.offsetTop - 16, behavior: 'smooth' });
+    });
 
     tick();
     setInterval(tick, 1000);
