@@ -80,11 +80,7 @@
     }
 
     /* main wrap */
-    .wrap{
-      width:100%;
-      max-width:1000px;
-      padding:10px 20px 30px;
-    }
+    .wrap{width:100%;max-width:1000px;padding:10px 20px 30px;}
 
     /* video */
     .video-wrapper{
@@ -192,26 +188,10 @@
       background:rgba(255,255,255,.08);
       border:1px solid rgba(255,255,255,.12);
     }
-    .bonus-sub{
-      margin:6px 0 0;
-      color:#6c1f49;
-      font-weight:700;
-      font-size:14px;
-    }
-    .bonus-list{
-      margin:10px 0 0 18px;
-      padding:0;
-      color:#3a1630;
-      font-size:15px;
-    }
+    .bonus-sub{margin:6px 0 0;color:#6c1f49;font-weight:700;font-size:14px;}
+    .bonus-list{margin:10px 0 0 18px;padding:0;color:#3a1630;font-size:15px;}
     .bonus-list li{margin:7px 0;}
-    .bonus-foot{
-      margin-top:10px;
-      font-size:13px;
-      color:#6c1f49;
-      opacity:.95;
-      font-weight:700;
-    }
+    .bonus-foot{margin-top:10px;font-size:13px;color:#6c1f49;opacity:.95;font-weight:700;}
 
     /* offer cards */
     .tiers{
@@ -238,10 +218,47 @@
       letter-spacing:.6px;text-transform:uppercase;background:#fff;border:1px solid rgba(124,92,255,.25);color:var(--purple-dark);
     }
 
-    /* PUSH CTA BUTTONS TO BOTTOM */
-    .card .cta-row{
+    /* compare button above CTAs */
+    .compare-btn{
+      width:100%;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid rgba(124,92,255,.25);
+      background:#fff;
+      color:var(--purple-dark);
+      font-weight:900;
+      cursor:pointer;
+      box-shadow:0 8px 18px rgba(0,0,0,.04);
+      transition:transform .1s, box-shadow .2s;
+    }
+    .compare-btn:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(0,0,0,.06);}
+    .compare-btn:active{transform:translateY(0px);}
+
+    /* collapsible features */
+    .collapsible{
+      overflow:hidden;
+      max-height:0;
+      opacity:0;
+      transition:max-height .35s ease, opacity .25s ease;
+    }
+    .collapsible.open{
+      max-height:1200px;
+      opacity:1;
+    }
+
+    /* PUSH ACTION AREA TO BOTTOM */
+    .card-actions{
       margin-top:auto;
       padding-top:12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .cta-row{
       display:flex;gap:10px;flex-wrap:wrap;
     }
 
@@ -265,6 +282,37 @@
       color:#fff;box-shadow:0 10px 24px rgba(124,92,255,.24), 0 10px 22px rgba(255,77,166,.18);
     }
     .btn.platinum:hover{background:linear-gradient(90deg,#6848e8,#e03f8f);box-shadow:0 12px 28px rgba(124,92,255,.34), 0 12px 26px rgba(255,77,166,.24);}
+
+    /* mini timer pill inside cards */
+    .mini-timer{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      background:#111;
+      color:#fff;
+      font-weight:900;
+      margin-top:6px;
+      width:fit-content;
+      box-shadow:0 10px 20px rgba(0,0,0,.16);
+    }
+    .mini-timer .label{
+      text-transform:uppercase;
+      letter-spacing:.7px;
+      font-size:11px;
+      opacity:.9;
+    }
+    .mini-timer .time{
+      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-weight:900;
+      font-size:13px;
+      letter-spacing:.6px;
+      padding:2px 8px;
+      border-radius:10px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+    }
 
     /* testimonials */
     .testimonials{width:100%;max-width:1000px;margin:22px auto 0;padding:0 0 10px;}
@@ -336,7 +384,7 @@
         is my highest-execution container where me and my happily married team help you move with clarity, date smarter, and vet men in real time — so you don’t waste months on the wrong ones again.
       </div>
 
-      <!-- BONUS BOX (NEW) -->
+      <!-- BONUS BOX -->
       <div class="bonus-box" id="bonus-box">
         <div class="bonus-top">
           <div class="bonus-title">Bonus: Start now (before 22.01) 💗</div>
@@ -346,9 +394,7 @@
           </div>
         </div>
 
-        <div class="bonus-sub">
-          We officially start on 22.01 — but with this bonus, you start now.
-        </div>
+        <div class="bonus-sub">We officially start on 22.01 — but with this bonus, you start now.</div>
 
         <ul class="bonus-list">
           <li>Fly on the wall in the current Get Married in 1 Year</li>
@@ -356,12 +402,11 @@
           <li>+ 2 Group Calls for personalised support</li>
         </ul>
 
-        <div class="bonus-foot">
-          Bonus expires on 14.12 at 23:59 CET.
-        </div>
+        <div class="bonus-foot">Bonus expires on 14.12 at 23:59 CET.</div>
       </div>
 
       <section class="tiers" id="cta-live">
+
         <!-- Gold -->
         <div class="card">
           <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
@@ -371,24 +416,32 @@
 
           <p class="subtitle">Premium access for women ready to be supported, guided, and accelerated into their dream marriage.</p>
 
-          <div class="why-box" style="border-color:#f1d88a;">
-            <strong>What you receive inside (Gold):</strong>
-            <ul style="margin:8px 0 0 18px">
-              <li>✨ 3 months inside an intimate VIP container</li>
-              <li>💬 24/5 Telegram support from me + married team</li>
-              <li>🎥 7 LIVE Zoom calls (every second week)</li>
-              <li>❤️ We vet men for you in real time</li>
-              <li>🌸 Core Feminine Dating frameworks & scripts</li>
-            </ul>
+          <div class="collapsible open" data-collapsible>
+            <div class="why-box" style="border-color:#f1d88a;">
+              <strong>What you receive inside (Gold):</strong>
+              <ul style="margin:8px 0 0 18px">
+                <li>✨ 3 months inside an intimate VIP container</li>
+                <li>💬 24/5 Telegram support from me + married team</li>
+                <li>🎥 7 LIVE Zoom calls (every second week)</li>
+                <li>❤️ We vet men for you in real time</li>
+                <li>🌸 Core Feminine Dating frameworks & scripts</li>
+              </ul>
+            </div>
           </div>
 
-          <div class="cta-row">
-            <a class="btn gold" href="https://feminine-dating.thrivecart.com/get-married-t1/" target="_blank" rel="noopener">
-              €2,222 Pay in Full →
-            </a>
-            <a class="btn" href="https://feminine-dating.thrivecart.com/get-married-t1/" target="_blank" rel="noopener">
-              4 × €644 Monthly →
-            </a>
+          <div class="card-actions">
+            <button class="compare-btn" type="button" data-toggle>
+              What will you receive? (tap to compare) ▾
+            </button>
+
+            <div class="cta-row">
+              <a class="btn gold" href="https://feminine-dating.thrivecart.com/get-married-t1/" target="_blank" rel="noopener">
+                €2,222 Pay in Full →
+              </a>
+              <a class="btn" href="https://feminine-dating.thrivecart.com/get-married-t1/" target="_blank" rel="noopener">
+                4 × €644 Monthly →
+              </a>
+            </div>
           </div>
         </div>
 
@@ -401,30 +454,136 @@
 
           <p class="subtitle">6 months of premium, high-touch support — double the time, depth, and integration for women committed to a 2026 marriage.</p>
 
+          <div class="mini-timer" style="margin-top:2px;">
+            <span class="label">Special price ends in</span>
+            <span class="time" data-deadline="main">Loading…</span>
+          </div>
           <p style="margin:0;color:var(--muted);font-size:13px;">
             Special price until <strong>20.12. at 23:59 CET</strong> – instead of €4,444 or 6 × €822.
           </p>
 
-          <div class="why-box" style="border-color:#d5ccff;">
-            <strong>What you receive inside (Platinum):</strong>
-            <ul style="margin:8px 0 0 18px">
-              <li>✨ 6 months inside the VIP container</li>
-              <li>💬 24/5 Telegram support from me + married team</li>
-              <li>🎥 Extended LIVE coaching across a longer season</li>
-              <li>❤️ Vetting men over time (patterns, not moments)</li>
-              <li>🌸 Access to 10 Feminine Dating frameworks</li>
-            </ul>
+          <div class="collapsible open" data-collapsible>
+            <div class="why-box" style="border-color:#d5ccff;">
+              <strong>What you receive inside (Platinum):</strong>
+              <ul style="margin:8px 0 0 18px">
+                <li>✨ 6 months inside the VIP container</li>
+                <li>💬 24/5 Telegram support from me + married team</li>
+                <li>🎥 Extended LIVE coaching across a longer season</li>
+                <li>❤️ Vetting men over time (patterns, not moments)</li>
+                <li>🌸 Access to 10 Feminine Dating frameworks</li>
+              </ul>
+            </div>
           </div>
 
-          <div class="cta-row">
-            <a class="btn platinum" href="https://feminine-dating.thrivecart.com/get-married-p6/" target="_blank" rel="noopener">
-              €3,444 Pay in Full →
-            </a>
-            <a class="btn" href="https://feminine-dating.thrivecart.com/get-married-p6/" target="_blank" rel="noopener">
-              6 × €644 Monthly →
-            </a>
+          <div class="card-actions">
+            <button class="compare-btn" type="button" data-toggle>
+              What will you receive? (tap to compare) ▾
+            </button>
+
+            <div class="cta-row">
+              <a class="btn platinum" href="https://feminine-dating.thrivecart.com/get-married-p6/" target="_blank" rel="noopener">
+                €3,444 Pay in Full →
+              </a>
+              <a class="btn" href="https://feminine-dating.thrivecart.com/get-married-p6/" target="_blank" rel="noopener">
+                6 × €644 Monthly →
+              </a>
+            </div>
           </div>
         </div>
+
+        <!-- Self-Study Light Support -->
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+            <h2 style="margin:0;">Get Married in 1 Year – Self-Study (Light Support)</h2>
+            <span class="badge">Self study</span>
+          </div>
+
+          <p class="subtitle">Structured guidance, gentle momentum, and a dedicated space to stay consistent, supported, and inspired.</p>
+
+          <div class="collapsible open" data-collapsible>
+            <div class="why-box" style="border-color:#d5ccff;">
+              <strong>What you receive:</strong>
+              <ul style="margin:8px 0 0 18px">
+                <li>💬 6 Telegram VIP Days (2× per month) — your sacred check-in days to ask questions, be seen, and receive personalised feedback.</li>
+                <li>📝 Dating Profile Audit — we refine your photos and bio so your essence shines and the right men lean in.</li>
+                <li>👭 Dedicated Silver Group — a focused, encouraging circle of women with your same intention.</li>
+                <li>🛡️ Limited Vetting Support — light protection and perspective so you don’t waste time on the wrong men.</li>
+                <li>Emotional communication that evokes pursuit and care</li>
+                <li>Steady shifts in self-worth, trust, and feminine magnetism</li>
+                <li>Consistency and accountability without overwhelm</li>
+                <li>Clear next steps so you always know what to do next</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button class="compare-btn" type="button" data-toggle>
+              What will you receive? (tap to compare) ▾
+            </button>
+
+            <div class="cta-row">
+              <a class="btn" href="#" target="_blank" rel="noopener">
+                €1,222 Pay in Full →
+              </a>
+              <a class="btn" href="#" target="_blank" rel="noopener">
+                4 × €355 →
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6-month Self-Study Double (expires 20.12 23:59) -->
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+            <h2 style="margin:0;">Get Married in 1 Year – Self-Study (6 Months, Everything Double)</h2>
+            <span class="badge">Special offer</span>
+          </div>
+
+          <div class="mini-timer" style="margin-top:2px;">
+            <span class="label">Special price ends in</span>
+            <span class="time" data-deadline="main">Loading…</span>
+          </div>
+
+          <p class="subtitle" style="margin-top:2px;">
+            Everything double — more practice, more support windows, more integration.
+          </p>
+
+          <p style="margin:0;color:var(--muted);font-size:13px;">
+            Special price until <strong>20.12. at 23:59 CET</strong> — then it becomes <strong>€2,444</strong> or <strong>6 × €433</strong>.
+          </p>
+
+          <div class="collapsible open" data-collapsible>
+            <div class="why-box" style="border-color:#d5ccff;">
+              <strong>What you receive (everything double):</strong>
+              <ul style="margin:8px 0 0 18px">
+                <li>💬 12 Telegram VIP Days (2× per month) — twice the check-ins, twice the calibration.</li>
+                <li>📝 Dating Profile Audit + follow-up refinement — iterate until it truly matches your essence.</li>
+                <li>👭 Dedicated Silver Group — 6 months of steady momentum and encouragement.</li>
+                <li>🛡️ Limited Vetting Support — longer runway to spot patterns early and avoid time-wasters.</li>
+                <li>Emotional communication that evokes pursuit and care</li>
+                <li>Steady shifts in self-worth, trust, and feminine magnetism</li>
+                <li>Consistency and accountability without overwhelm</li>
+                <li>Clear next steps so you always know what to do next</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button class="compare-btn" type="button" data-toggle>
+              What will you receive? (tap to compare) ▾
+            </button>
+
+            <div class="cta-row">
+              <a class="btn platinum" href="#" target="_blank" rel="noopener">
+                €1,911 Pay in Full →
+              </a>
+              <a class="btn" href="#" target="_blank" rel="noopener">
+                6 × €370 →
+              </a>
+            </div>
+          </div>
+        </div>
+
       </section>
 
       <!-- Embedded Testimonials -->
@@ -479,6 +638,9 @@
     const $revealBtn = document.getElementById('reveal-btn');
     const $iframe = document.getElementById('vimeo-iframe');
 
+    const miniMainTimers = Array.from(document.querySelectorAll('[data-deadline="main"]'));
+    const toggles = Array.from(document.querySelectorAll('[data-toggle]'));
+
     let player;
     try { player = new Vimeo.Player($iframe); } catch(e){}
 
@@ -506,11 +668,15 @@
         $offersWrapper.style.display = 'none';
         $revealBtn.disabled = true;
 
+        miniMainTimers.forEach(el => el.textContent = '00d 00h 00m 00s');
+
         if(player){
           player.pause().catch(()=>{}).finally(()=>{ if(player.unload) player.unload(); });
         }
       } else {
-        $count.textContent = formatRemaining(remaining);
+        const txt = formatRemaining(remaining);
+        $count.textContent = txt;
+        miniMainTimers.forEach(el => el.textContent = txt);
       }
 
       // bonus countdown
@@ -518,7 +684,6 @@
         const bRemain = BONUS_EXPIRY_UTC_MS - now;
         if(bRemain <= 0){
           $bonusCount.textContent = '00d 00h 00m 00s';
-          // Hide bonus box after expiration (clean + honest)
           $bonusBox.style.display = 'none';
         } else {
           $bonusCount.textContent = formatRemaining(bRemain);
@@ -526,10 +691,27 @@
       }
     }
 
+    // Reveal offers on click
     $revealBtn.addEventListener('click', () => {
       if(Date.now() > EXPIRY_UTC_MS) return;
       $offersWrapper.style.display = 'block';
       window.scrollTo({ top: $offersWrapper.offsetTop - 16, behavior: 'smooth' });
+    });
+
+    // Compare toggles (open/close the "what you receive" box)
+    toggles.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.card');
+        if(!card) return;
+        const panel = card.querySelector('[data-collapsible]');
+        if(!panel) return;
+
+        const isOpen = panel.classList.contains('open');
+        panel.classList.toggle('open', !isOpen);
+        btn.textContent = !isOpen
+          ? 'Hide what you receive ▴'
+          : 'What will you receive? (tap to compare) ▾';
+      });
     });
 
     tick();
