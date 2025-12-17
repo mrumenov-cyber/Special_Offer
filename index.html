@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -97,21 +98,6 @@
       max-width:1000px;
       padding:10px 20px 30px;
     }
-    .price-line{
-  margin:10px 0 0;
-  font-size:14px;
-  color:#5b2a45;
-}
-.price-line .was{
-  text-decoration:line-through;
-  opacity:.65;
-  margin-right:8px;
-}
-.price-line .now{
-  font-weight:1000;
-  color:#b82b6f;
-}
-
 
     /* video */
     .video-wrapper{
@@ -151,6 +137,18 @@
 
     /* offers hidden */
     .hidden-offers{display:none;}
+
+    /* unlock note */
+    #unlock-note{
+      margin:10px auto 0;
+      max-width:720px;
+      color:#6b2a52;
+      font-weight:700;
+      font-size:14px;
+      opacity:.95;
+      line-height:1.45;
+      text-align:center;
+    }
 
     /* intro */
     .pink-intro{
@@ -264,6 +262,23 @@
       font-size:14px;
       line-height:1.5;
     }
+
+    /* PRICE LINE (was/now) */
+    .price-line{
+      margin:10px 0 0;
+      font-size:14px;
+      color:#5b2a45;
+    }
+    .price-line .was{
+      text-decoration:line-through;
+      opacity:.65;
+      margin-right:8px;
+    }
+    .price-line .now{
+      font-weight:1000;
+      color:#b82b6f;
+    }
+
     .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
     .btn{
       flex:1 1 220px;
@@ -326,15 +341,17 @@
     <h1 class="hero-title">The Framework That Gets Women Married in One Year (Without Luck or Hustle)</h1>
 
     <p class="hero-sub">
-      Even if you have been unlucky in love, 
-      Even if you never dated,
-      Even if you think you are too old, 
-      Even if you just broke up,
-      Even if you are 100% sure that love is not in your cards…
+      Even if you have been unlucky in love, even if you never dated,
+      even if you think you are too old, even if you just broke up,
+      even if you are 100% sure that love is not in your cards…
       <br/><br/>
       Watch the training, then click below to see the program options 💗
     </p>
 
+    <p class="hero-mission">
+      My mission is to reduce divorce and create happy families and children that observe love between their parents and thrive in life,
+      by raising the standards in Husband Selection and embodying the right relationship marriage before marriage.
+    </p>
   </header>
 
   <div class="wrap">
@@ -362,11 +379,8 @@
     <section class="reveal-wrap">
       <button id="reveal-btn" class="reveal-btn">Show me how 💗</button>
     </section>
-      <p class="hero-mission">
-      Our mission is to transform the future of families by elevating how women choose partners and how relationships are lived long before marriage - so love is modeled daily, marriages last, and children grow up grounded, safe, and thriving.
-    </p>
 
-    <p id="unlock-note" style="margin:10px auto 0;max-width:720px;color:#6b2a52;font-weight:700;font-size:14px;opacity:.95;line-height:1.45;text-align:center;">
+    <p id="unlock-note">
       This button unlocks in 10 minutes on purpose 💗<br/>
       Why: so you actually watch the training fully (not skim), and decide from clarity.
     </p>
@@ -379,7 +393,7 @@
         is my highest-execution container where me and my happily married team help you move with clarity, date smarter, and vet men in real time — so you don’t waste months on the wrong ones again.
       </div>
 
-      <!-- BONUS BOX -->
+      <!-- BONUS BOX (NEW) -->
       <div class="bonus-box" id="bonus-box">
         <div class="bonus-top">
           <div class="bonus-title">Bonus: Start now (before 22.01) 💗</div>
@@ -448,6 +462,11 @@
             Special price until <strong>20.12. at 23:59 CET</strong> – instead of €4,444 or 6 × €822.
           </p>
 
+          <p class="price-line">
+            <span class="was">€4,444</span>
+            <span class="now">Now €3,444 (Special Offer)</span>
+          </p>
+
           <div class="why-box" style="border-color:#d5ccff;">
             <strong>What you receive inside (Platinum):</strong>
             <ul style="margin:8px 0 0 18px">
@@ -461,7 +480,7 @@
 
           <div class="cta-row">
             <a class="btn platinum" href="https://feminine-dating.thrivecart.com/get-married-p6/" target="_blank" rel="noopener">
-              €3,444 Pay in Full →
+              €3,444 Pay in Full (was €4,444) →
             </a>
             <a class="btn" href="https://feminine-dating.thrivecart.com/get-married-p6/" target="_blank" rel="noopener">
               6 × €644 Monthly →
@@ -561,6 +580,7 @@
         const bRemain = BONUS_EXPIRY_UTC_MS - now;
         if(bRemain <= 0){
           $bonusCount.textContent = '00d 00h 00m 00s';
+          // Hide bonus box after expiration (clean + honest)
           $bonusBox.style.display = 'none';
         } else {
           $bonusCount.textContent = formatRemaining(bRemain);
@@ -569,10 +589,13 @@
     }
 
     // --- 10 MINUTE DELAY FOR "SHOW ME HOW" BUTTON ---
+    // Purpose: encourage watching the training in full (instead of skipping straight to prices).
     const UNLOCK_AFTER_MS = 10 * 60 * 1000; // 10 minutes
     const UNLOCK_KEY = 'gm1y_unlock_started_at';
+
     const originalRevealText = $revealBtn.textContent;
 
+    // Store a start time so page refresh doesn’t reset the countdown.
     let startedAt = Number(localStorage.getItem(UNLOCK_KEY));
     if(!startedAt){
       startedAt = Date.now();
@@ -611,19 +634,19 @@
     updateRevealLock();
     unlockInterval = setInterval(updateRevealLock, 1000);
 
-$revealBtn.addEventListener('click', () => {
-  // hard block if still within the 10-minute lock window
-  const elapsed = Date.now() - startedAt;
-  if(elapsed < UNLOCK_AFTER_MS) return;
+    $revealBtn.addEventListener('click', () => {
+      // Hard block if still within the 10-minute lock window
+      const elapsed = Date.now() - startedAt;
+      if(elapsed < UNLOCK_AFTER_MS) return;
 
-  if(Date.now() > EXPIRY_UTC_MS) return;
-  $offersWrapper.style.display = 'block';
-  window.scrollTo({ top: $offersWrapper.offsetTop - 16, behavior: 'smooth' });
-});
-
+      if(Date.now() > EXPIRY_UTC_MS) return;
+      $offersWrapper.style.display = 'block';
+      window.scrollTo({ top: $offersWrapper.offsetTop - 16, behavior: 'smooth' });
+    });
 
     tick();
     setInterval(tick, 1000);
   </script>
 </body>
 </html>
+```
