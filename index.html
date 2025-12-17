@@ -97,6 +97,21 @@
       max-width:1000px;
       padding:10px 20px 30px;
     }
+    .price-line{
+  margin:10px 0 0;
+  font-size:14px;
+  color:#5b2a45;
+}
+.price-line .was{
+  text-decoration:line-through;
+  opacity:.65;
+  margin-right:8px;
+}
+.price-line .now{
+  font-weight:1000;
+  color:#b82b6f;
+}
+
 
     /* video */
     .video-wrapper{
@@ -596,11 +611,16 @@
     updateRevealLock();
     unlockInterval = setInterval(updateRevealLock, 1000);
 
-    $revealBtn.addEventListener('click', () => {
-      if(Date.now() > EXPIRY_UTC_MS) return;
-      $offersWrapper.style.display = 'block';
-      window.scrollTo({ top: $offersWrapper.offsetTop - 16, behavior: 'smooth' });
-    });
+$revealBtn.addEventListener('click', () => {
+  // hard block if still within the 10-minute lock window
+  const elapsed = Date.now() - startedAt;
+  if(elapsed < UNLOCK_AFTER_MS) return;
+
+  if(Date.now() > EXPIRY_UTC_MS) return;
+  $offersWrapper.style.display = 'block';
+  window.scrollTo({ top: $offersWrapper.offsetTop - 16, behavior: 'smooth' });
+});
+
 
     tick();
     setInterval(tick, 1000);
