@@ -381,12 +381,6 @@
       Why: so you actually watch the training fully (not skim), and decide from clarity.
     </p>
 
-     <p class="hero-mission">
-       <br/><br/>
-      Our mission is to reduce divorce and create happy families and children that observe love between their parents and thrive in life,
-      by elevating the standards in selecting a Husband and embodying the right relationship skills before marriage.
-    </p>
-
     <!-- OFFERS + TESTIMONIALS (HIDDEN UNTIL CLICK) -->
     <div id="offers-wrapper" class="hidden-offers">
 
@@ -526,128 +520,154 @@
     Offer closes on 20 December at 23:59 CET 💜
   </footer>
 
-  <script src="https://player.vimeo.com/api/player.js"></script>
-  <script>
-    // Main offer: 20 December 2025, 23:59 CET = 22:59 UTC
-    const EXPIRY_UTC_MS = Date.UTC(2025, 11, 20, 22, 59, 0);
+ <script src="https://player.vimeo.com/api/player.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
 
-    // Bonus: 14 December 2025, 23:59 CET = 22:59 UTC
-    const BONUS_EXPIRY_UTC_MS = Date.UTC(2025, 11, 14, 22, 59, 0);
+  // Main offer: 20 December 2025, 23:59 CET = 22:59 UTC
+  const EXPIRY_UTC_MS = Date.UTC(2025, 11, 20, 22, 59, 0);
 
-    const $count = document.getElementById('countdown');
-    const $bonusCount = document.getElementById('bonus-countdown');
-    const $bonusBox = document.getElementById('bonus-box');
+  // Bonus: 14 December 2025, 23:59 CET = 22:59 UTC
+  const BONUS_EXPIRY_UTC_MS = Date.UTC(2025, 11, 14, 22, 59, 0);
 
-    const $overlay = document.getElementById('expired-overlay');
-    const $offersWrapper = document.getElementById('offers-wrapper');
-    const $revealBtn = document.getElementById('reveal-btn');
-    const $iframe = document.getElementById('vimeo-iframe');
+  const $count = document.getElementById('countdown');
+  const $bonusCount = document.getElementById('bonus-countdown');
+  const $bonusBox = document.getElementById('bonus-box');
 
-    let player;
-    try { player = new Vimeo.Player($iframe); } catch(e){}
+  const $overlay = document.getElementById('expired-overlay');
+  const $offersWrapper = document.getElementById('offers-wrapper');
+  const $revealBtn = document.getElementById('reveal-btn');
+  const $iframe = document.getElementById('vimeo-iframe');
 
-    function pad2(n){ return String(n).padStart(2,'0'); }
-    function formatRemaining(ms){
-      if(ms <= 0) return '00d 00h 00m 00s';
-      const s = Math.floor(ms/1000);
-      const d = Math.floor(s/86400);
-      const h = Math.floor((s%86400)/3600);
-      const m = Math.floor((s%3600)/60);
-      const sec = s%60;
-      return pad2(d)+'d '+pad2(h)+'h '+pad2(m)+'m '+pad2(sec)+'s';
-    }
+  // If the host/page builder stripped IDs, fail gracefully
+  if(!$count || !$revealBtn || !$offersWrapper){
+    return;
+  }
 
-    function tick(){
+  // Vimeo player (safe)
+  let player;
+  try { player = new Vimeo.Player($iframe); } catch(e){}
+
+  function pad2(n){ return String(n).padStart(2,'0'); }
+
+  function formatRemaining(ms){
+    if(ms <= 0) return '00d 00h 00m 00s';
+    const s = Math.floor(ms/1000);
+    const d = Math.floor(s/86400);
+    const h = Math.floor((s%86400)/3600);
+    const m = Math.floor((s%3600)/60);
+    const sec = s%60;
+    return pad2(d)+'d '+pad2(h)+'h '+pad2(m)+'m '+pad2(sec)+'s';
+  }
+
+  // ---------- BUTTON 10-MIN LOCK (BULLETPROOF) ----------
+  const UNLOCK_AFTER_MS = 10 * 60 * 1000; // 10 minutes
+  const UNLOCK_KEY = 'gm1y_unlock_started_at';
+  const originalRevealText = $revealBtn.textContent;
+
+  // localStorage can fail on some hosts → fallback to in-memory
+  let startedAt;
+
+  function safeGetStartedAt(){
+    try {
+      const v = localStorage.getItem(UNLOCK_KEY);
+      if(v) return Number(v);
       const now = Date.now();
+      localStorage.setItem(UNLOCK_KEY, String(now));
+      return now;
+    } catch(err){
+      // fallback (still enforces 10 mins for THIS page session)
+      if(!startedAt) startedAt = Date.now();
+      return startedAt;
+    }
+  }
 
-      // main countdown
-      const remaining = EXPIRY_UTC_MS - now;
-      const expired = remaining <= 0;
+  startedAt = safeGetStartedAt();
 
-      if(expired){
-        $count.textContent = '00d 00h 00m 00s';
-        $overlay.style.display = 'flex';
-        $offersWrapper.style.display = 'none';
-        $revealBtn.disabled = true;
+  function formatMMSS(ms){
+    const total = Math.max(0, Math.ceil(ms / 1000));
+    const m = Math.floor(total / 60);
+    const s = total % 60;
+    return String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  }
 
-        if(player){
-          player.pause().catch(()=>{}).finally(()=>{ if(player.unload) player.unload(); });
-        }
+  function isUnlocked(){
+    const now = Date.now();
+    return (now - startedAt) >= UNLOCK_AFTER_MS;
+  }
+
+  function updateRevealLock(){
+    if(Date.now() > EXPIRY_UTC_MS){
+      $revealBtn.disabled = true;
+      $revealBtn.textContent = originalRevealText;
+      return;
+    }
+
+    // refresh startedAt if storage becomes available
+    startedAt = safeGetStartedAt();
+
+    const elapsed = Date.now() - startedAt;
+    const remaining = UNLOCK_AFTER_MS - elapsed;
+
+    if(remaining > 0){
+      $revealBtn.disabled = true;
+      $revealBtn.textContent = `Unlocking in ${formatMMSS(remaining)} 💗`;
+    } else {
+      $revealBtn.disabled = false;
+      $revealBtn.textContent = originalRevealText;
+    }
+  }
+
+  // Always attach click handler
+  $revealBtn.addEventListener('click', () => {
+    if(Date.now() > EXPIRY_UTC_MS) return;
+    if(!isUnlocked()) return;
+
+    $offersWrapper.style.display = 'block';
+    window.scrollTo({ top: $offersWrapper.offsetTop - 16, behavior: 'smooth' });
+  });
+
+  // ---------- MAIN + BONUS TIMERS ----------
+  function tick(){
+    const now = Date.now();
+
+    // main countdown
+    const remaining = EXPIRY_UTC_MS - now;
+    const expired = remaining <= 0;
+
+    if(expired){
+      $count.textContent = '00d 00h 00m 00s';
+      if($overlay) $overlay.style.display = 'flex';
+      $offersWrapper.style.display = 'none';
+      $revealBtn.disabled = true;
+
+      if(player){
+        player.pause().catch(()=>{}).finally(()=>{ if(player.unload) player.unload(); });
+      }
+    } else {
+      $count.textContent = formatRemaining(remaining);
+    }
+
+    // bonus countdown
+    if($bonusCount && $bonusBox){
+      const bRemain = BONUS_EXPIRY_UTC_MS - now;
+      if(bRemain <= 0){
+        $bonusCount.textContent = '00d 00h 00m 00s';
+        $bonusBox.style.display = 'none';
       } else {
-        $count.textContent = formatRemaining(remaining);
-      }
-
-      // bonus countdown
-      if($bonusCount && $bonusBox){
-        const bRemain = BONUS_EXPIRY_UTC_MS - now;
-        if(bRemain <= 0){
-          $bonusCount.textContent = '00d 00h 00m 00s';
-          // Hide bonus box after expiration (clean + honest)
-          $bonusBox.style.display = 'none';
-        } else {
-          $bonusCount.textContent = formatRemaining(bRemain);
-        }
+        $bonusCount.textContent = formatRemaining(bRemain);
       }
     }
+  }
 
-    // --- 10 MINUTE DELAY FOR "SHOW ME HOW" BUTTON ---
-    // Purpose: encourage watching the training in full (instead of skipping straight to prices).
-    const UNLOCK_AFTER_MS = 10 * 60 * 1000; // 10 minutes
-    const UNLOCK_KEY = 'gm1y_unlock_started_at';
+  // start everything
+  tick();
+  updateRevealLock();
+  setInterval(tick, 1000);
+  setInterval(updateRevealLock, 1000);
 
-    const originalRevealText = $revealBtn.textContent;
+});
+</script>
 
-    // Store a start time so page refresh doesn’t reset the countdown.
-    let startedAt = Number(localStorage.getItem(UNLOCK_KEY));
-    if(!startedAt){
-      startedAt = Date.now();
-      localStorage.setItem(UNLOCK_KEY, String(startedAt));
-    }
-
-    function formatMMSS(ms){
-      const total = Math.max(0, Math.ceil(ms / 1000));
-      const m = Math.floor(total / 60);
-      const s = total % 60;
-      return String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
-    }
-
-    let unlockInterval;
-    function updateRevealLock(){
-      const elapsed = Date.now() - startedAt;
-      const remaining = UNLOCK_AFTER_MS - elapsed;
-
-      if(Date.now() > EXPIRY_UTC_MS){
-        $revealBtn.disabled = true;
-        $revealBtn.textContent = originalRevealText;
-        if(unlockInterval) clearInterval(unlockInterval);
-        return;
-      }
-
-      if(remaining > 0){
-        $revealBtn.disabled = true;
-        $revealBtn.textContent = `Unlocking in ${formatMMSS(remaining)} 💗`;
-      } else {
-        $revealBtn.disabled = false;
-        $revealBtn.textContent = originalRevealText;
-        if(unlockInterval) clearInterval(unlockInterval);
-      }
-    }
-
-    updateRevealLock();
-    unlockInterval = setInterval(updateRevealLock, 1000);
-
-    $revealBtn.addEventListener('click', () => {
-      // Hard block if still within the 10-minute lock window
-      const elapsed = Date.now() - startedAt;
-      if(elapsed < UNLOCK_AFTER_MS) return;
-
-      if(Date.now() > EXPIRY_UTC_MS) return;
-      $offersWrapper.style.display = 'block';
-      window.scrollTo({ top: $offersWrapper.offsetTop - 16, behavior: 'smooth' });
-    });
-
-    tick();
-    setInterval(tick, 1000);
-  </script>
 </body>
 </html>
