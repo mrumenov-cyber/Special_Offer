@@ -1,515 +1,72 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The Framework That Gets Women Married in One Year (Without Luck or Hustle)</title>
-
-  <style>
-    :root{
-      --gold:#c9a227;
-      --gold-deep:#b8921f;
-      --gold-soft:#f9f1cf;
-      --gold-edge:#eadca6;
-
-      --purple:#7c5cff;
-      --purple-dark:#6848e8;
-
-      --pink:#ff4da6;
-      --pink-deep:#e03f8f;
-
-      --ink:#1a1a1a;
-      --muted:#555;
-      --bg:#fff;
-      --box:#f8f8fc;
-      --edge:#e5e6ee;
-    }
-
-    *{box-sizing:border-box}
-    body{
-      margin:0;background:var(--bg);color:var(--ink);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
-      display:flex;flex-direction:column;align-items:center;justify-content:flex-start;min-height:100vh;
-    }
-
-    header{
-      text-align:center;
-      padding:22px 20px 10px;
-      max-width:1000px;width:100%;
-    }
-
-    /* BLACK TIMER (HIGH VISIBILITY) */
-    .timer-box{
-      margin:12px 0 10px;
-      padding:12px 18px;
-      border-radius:999px;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      background:#111;
-      color:#fff;
-      border:1px solid rgba(255,255,255,.18);
-      font-size:14px;
-      font-weight:900;
-      box-shadow:0 10px 26px rgba(0,0,0,.22);
-    }
-    .timer-label{
-      text-transform:uppercase;
-      letter-spacing:.9px;
-      font-size:11px;
-      opacity:.9;
-    }
-    #countdown{
-      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-weight:900;
-      font-size:15px;
-      letter-spacing:.6px;
-      padding:2px 8px;
-      border-radius:10px;
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.12);
-    }
-
-    .hero-title{
-      margin:10px 0 10px;
-      font-size:34px;line-height:1.15;font-weight:900;letter-spacing:.2px;
-    }
-    .hero-sub{
-      margin:6px 0 0;color:var(--muted);font-size:16px;max-width:820px;
-      margin-left:auto;margin-right:auto;
-    }
-
-    /* main wrap */
-    .wrap{
-      width:100%;
-      max-width:1000px;
-      padding:10px 20px 30px;
-    }
-
-    /* video */
-    .video-wrapper{
-      width:100%;
-      position:relative;
-      border-radius:16px;
-      overflow:hidden;
-      border:1px solid var(--edge);
-      box-shadow:0 6px 22px rgba(0,0,0,.06);
-      background:#fff;
-      margin-top:14px;
-    }
-    .video-wrapper::before{content:"";display:block;padding-top:75%;}
-    .video-wrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
-
-    .expired{
-      position:absolute;inset:0;display:none;align-items:center;justify-content:center;
-      background:rgba(0,0,0,.82);backdrop-filter:blur(6px);color:#fff;text-align:center;padding:20px
-    }
-
-    /* reveal button */
-    .reveal-wrap{text-align:center;margin:18px 0 10px;}
-    .reveal-btn{
-      background:linear-gradient(90deg,#7c5cff,#ff4da6);
-      color:#fff;border:none;padding:16px 32px;border-radius:18px;
-      font-size:18px;font-weight:900;cursor:pointer;letter-spacing:.3px;
-      box-shadow:0 12px 26px rgba(124,92,255,.22), 0 12px 22px rgba(255,77,166,.18);
-      transition:transform .12s, box-shadow .2s, background .2s;
-    }
-    .reveal-btn:hover{
-      transform:translateY(-2px);
-      box-shadow:0 16px 32px rgba(124,92,255,.30), 0 16px 28px rgba(255,77,166,.24);
-      background:linear-gradient(90deg,#6848e8,#e03f8f);
-    }
-    .reveal-btn:active{transform:translateY(0px);box-shadow:0 10px 18px rgba(0,0,0,.10);}
-    .reveal-btn[disabled]{opacity:.55;cursor:not-allowed;transform:none}
-
-    /* offers hidden */
-    .hidden-offers{display:none;}
-
-    /* intro */
-    .pink-intro{
-      max-width:920px;margin:14px auto 18px;border-radius:18px;padding:18px 18px;
-      background:linear-gradient(180deg,#fff1fa 0%, #ffe1f4 100%);
-      border:1px solid #ffb7dd;
-      box-shadow:0 6px 18px rgba(255,77,166,.14);
-      line-height:1.55;color:var(--ink);font-size:16px;text-align:center;
-    }
-    .pink-intro .kicker{
-      display:inline-block;font-weight:900;color:#ff2a92;margin-bottom:6px;letter-spacing:.2px;
-    }
-
-    /* BONUS PINK BOX (WITH ITS OWN TIMER) */
-    .bonus-box{
-      max-width:920px;
-      margin:0 auto 18px;
-      border-radius:18px;
-      padding:18px 18px 16px;
-      background:linear-gradient(135deg,#ffe7f5 0%, #fff0fa 55%, #ffe9f7 100%);
-      border:1px solid #ffb7dd;
-      box-shadow:0 10px 26px rgba(255,77,166,.16);
-      line-height:1.55;
-      color:var(--ink);
-      position:relative;
-      overflow:hidden;
-    }
-    .bonus-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-bottom:8px;
-    }
-    .bonus-title{
-      font-weight:1000;
-      font-size:18px;
-      color:#b82b6f;
-      letter-spacing:.2px;
-    }
-    .bonus-timer{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 14px;
-      border-radius:999px;
-      background:#111;
-      color:#fff;
-      font-weight:900;
-      box-shadow:0 10px 20px rgba(0,0,0,.18);
-    }
-    .bonus-timer .label{
-      text-transform:uppercase;
-      letter-spacing:.8px;
-      font-size:11px;
-      opacity:.9;
-    }
-    #bonus-countdown{
-      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-weight:900;
-      font-size:14px;
-      letter-spacing:.6px;
-      padding:2px 8px;
-      border-radius:10px;
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.12);
-    }
-    .bonus-sub{
-      margin:6px 0 0;
-      color:#6c1f49;
-      font-weight:700;
-      font-size:14px;
-    }
-    .bonus-list{
-      margin:10px 0 0 18px;
-      padding:0;
-      color:#3a1630;
-      font-size:15px;
-    }
-    .bonus-list li{margin:7px 0;}
-    .bonus-foot{
-      margin-top:10px;
-      font-size:13px;
-      color:#6c1f49;
-      opacity:.95;
-      font-weight:700;
-    }
-
-    /* offer cards */
-    .tiers{
-      width:100%;max-width:1000px;margin:0 auto 10px;
-      display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      align-items:stretch;
-    }
-
-    .card{
-      border-radius:16px;padding:22px 22px 18px;border:1px solid var(--edge);background:var(--box);
-      display:flex;flex-direction:column;gap:10px;
-      box-shadow:0 8px 24px rgba(0,0,0,.05);
-      height:100%;
-    }
-    .card h2{margin:0;font-size:22px;font-weight:900;line-height:1.2}
-    .subtitle{color:var(--muted);margin:0;font-size:14px;line-height:1.45}
-
-    .why-box{
-      background:#fff;border:1px dashed #d0d7db;border-radius:12px;padding:12px 12px;line-height:1.5;font-size:14px;
-    }
-
-    .badge{
-      display:inline-block;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:900;
-      letter-spacing:.6px;text-transform:uppercase;background:#fff;border:1px solid rgba(124,92,255,.25);color:var(--purple-dark);
-    }
-
-    /* PUSH CTA BUTTONS TO BOTTOM */
-    .card .cta-row{
-      margin-top:auto;
-      padding-top:12px;
-      display:flex;gap:10px;flex-wrap:wrap;
-    }
-
-    .btn{
-      display:inline-block;background:linear-gradient(90deg,#7c5cff,#6848e8);
-      color:#fff;padding:14px 18px;border-radius:12px;text-decoration:none;
-      font-weight:900;font-size:16px;box-shadow:0 8px 20px rgba(124,92,255,.25);
-      transition:transform .1s, box-shadow .2s, background .2s;
-    }
-    .btn:hover{background:linear-gradient(90deg,#6848e8,#5738d6);box-shadow:0 10px 24px rgba(124,92,255,.38);}
-    .btn:active{transform:translateY(1px)}
-
-    .btn.gold{
-      background:linear-gradient(90deg,#f6d76b,#c9a227);
-      color:#111;box-shadow:0 10px 22px rgba(201,162,39,.28);
-    }
-    .btn.gold:hover{background:linear-gradient(90deg,#f5c932,#b8921f);box-shadow:0 12px 26px rgba(201,162,39,.38);}
-
-    .btn.platinum{
-      background:linear-gradient(90deg,#7c5cff,#ff4da6);
-      color:#fff;box-shadow:0 10px 24px rgba(124,92,255,.24), 0 10px 22px rgba(255,77,166,.18);
-    }
-    .btn.platinum:hover{background:linear-gradient(90deg,#6848e8,#e03f8f);box-shadow:0 12px 28px rgba(124,92,255,.34), 0 12px 26px rgba(255,77,166,.24);}
-
-    /* testimonials */
-    .testimonials{width:100%;max-width:1000px;margin:22px auto 0;padding:0 0 10px;}
-    .t-wrap{
-      background:linear-gradient(135deg,#ffe7f2 0%, #fff0f7 45%, #ffe0f0 100%);
-      border:1px solid #ffd1e6;border-radius:20px;
-      box-shadow:0 12px 30px rgba(255,77,166,.18), 0 6px 14px rgba(0,0,0,.05);
-      padding:22px 20px;
-    }
-    .t-head{text-align:center;margin:0 0 14px 0;}
-    .t-head h2{margin:0;font-size:26px;line-height:1.2;color:#b82b6f;font-weight:900;letter-spacing:.2px;}
-    .t-head p{margin:8px 0 0;color:#7a2152;font-size:15px;}
-    .t-cta{text-align:center;margin:14px 0 16px;}
-    .t-cta a{
-      display:inline-block;background:var(--pink);color:#fff;font-weight:900;
-      text-decoration:none;padding:12px 18px;border-radius:999px;
-      box-shadow:0 8px 18px rgba(255,77,166,.25);
-    }
-    .t-cta a:hover{background:var(--pink-deep)}
-    .t-frame{position:relative;border-radius:14px;overflow:hidden;border:1px solid #ffcfe5;background:#fff;}
-    .t-frame::before{content:"";display:block;padding-top:70vh;max-height:820px;min-height:520px;}
-    .t-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-
-    footer{text-align:center;padding:18px 20px 26px;color:#777;font-size:14px;}
-  </style>
-</head>
-
-<body>
-  <header>
-    <div class="timer-box">
-      <span class="timer-label">Offer closes in</span>
-      <span id="countdown">Loading…</span>
-    </div>
-    <h1 class="hero-title">The Framework That Gets Women Married in One Year (Without Luck or Hustle)</h1>
-    <p class="hero-sub" style="max-width:860px;">
-      Even if you have been unlucky in love, even if you never dated,
-      even if you think you are too old, even if you just broke up,
-      even if you are 100% sure that love is not in your cards…
-      <br/><br/>
-      Watch the training, then click below to see the program options 💗
-    </p>
-  </header>
-
-  <div class="wrap">
-    <!-- VIDEO -->
-    <section class="video-wrapper">
-      <iframe
-        id="vimeo-iframe"
-        src="https://player.vimeo.com/video/1145788838?h=b8e88f8ad6&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
-        frameborder="0"
-        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        style="position:absolute;top:0;left:0;width:100%;height:100%;"
-        title="1.5 The Framework That Gets Women Married in One Year (Without Luck or Hustle)">
-      </iframe>
-
-      <div id="expired-overlay" class="expired">
-        <div>
-          <h2 style="margin:0 0 8px 0;">Access has ended</h2>
-          <p style="margin:0;opacity:.92">The training and the special offers are now closed.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- BUTTON -->
-    <section class="reveal-wrap">
-      <button id="reveal-btn" class="reveal-btn">Show me how 💗</button>
-    </section>
-
-    <!-- OFFERS + TESTIMONIALS (HIDDEN UNTIL CLICK) -->
-    <div id="offers-wrapper" class="hidden-offers">
-
-      <div class="pink-intro">
-        <div class="kicker">Get Married in 1 Year</div><br/>
-        is my highest-execution container where me and my happily married team help you move with clarity, date smarter, and vet men in real time — so you don’t waste months on the wrong ones again.
-      </div>
-
-      <!-- BONUS BOX (NEW) -->
-      <div class="bonus-box" id="bonus-box">
-        <div class="bonus-top">
-          <div class="bonus-title">Bonus: Start now (before 22.01) 💗</div>
-          <div class="bonus-timer" aria-label="Bonus timer">
-            <span class="label">Bonus ends in</span>
-            <span id="bonus-countdown">Loading…</span>
-          </div>
-        </div>
-
-        <div class="bonus-sub">
-          We officially start on 22.01
-        </div>
-
-      
-        
-
-        <!-- Platinum -->
-        <div class="card">
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
-            <h2 style="margin:0;">Get Married in 1 Year – Platinum</h2>
-            <span class="badge">Special offer - 6 Months</span>
-          </div>
-
-          <p class="subtitle">6 months of premium, high-touch support — double the time, depth, and integration for women committed to a 2026 marriage.</p>
-
-          <div class="why-box" style="border-color:#d5ccff;">
-            <strong>What you receive inside (Platinum):</strong>
-            <ul style="margin:8px 0 0 18px">
-              <li>✨ 6 months inside the VIP container</li>
-              <li>💬 24/5 Telegram support from me + married team</li>
-              <li>🎥 Extended LIVE coaching across a longer season</li>
-              <li>❤️ Vetting men over time (patterns, not moments)</li>
-              <li>🌸 Access to 10 Feminine Dating frameworks</li>
-            </ul>
-          </div>
-
-          <p style="margin:0;color:var(--muted);font-size:13px;">
-            Special price until <strong>25.01. at 23:59 CET</strong> – instead of €4,444 or 6 × €822.
-          </p>
-
-          <div class="cta-row">
-            <a class="btn platinum" href="https://feminine-dating.thrivecart.com/get-married-p6/" target="_blank" rel="noopener">
-              €4,000 Pay in EUR →
-            </a>
-            <a class="btn" href="https://feminine-dating.thrivecart.com/get-married-p6/" target="_blank" rel="noopener">
-              6 × €744 Monthly →
-            </a>
-          </div>
-
-          <div class="cta-row">
-            <a class="btn gold" href="https://feminine-dating.thrivecart.com/get-married-usd/" target="_blank" rel="noopener">
-              $4,700 Pay in USD Dollars →
-            </a>
-            <a class="btn" href="https://feminine-dating.thrivecart.com/get-married-usd/" target="_blank" rel="noopener">
-              4 × $888 Monthly in USD Dollars →
-            </a>
-        </div>
-
-      </section>
-
-      <!-- Embedded Testimonials -->
-      <section id="testimonials" class="testimonials" aria-labelledby="t-title">
-        <div class="t-wrap">
-          <div class="t-head">
-            <h2 id="t-title">✨ Testimonials & Stories of Success</h2>
-            <p>Real women. Real results. Let their journeys inspire your next step.</p>
-          </div>
-
-          <div class="t-cta">
-            <a href="https://feminine-dating-results.start.page/" target="_blank" rel="noopener">Open Full Stories in New Tab →</a>
-          </div>
-
-          <div class="t-frame">
-            <iframe
-              src="https://feminine-dating-results.start.page/"
-              title="Testimonials & Stories of Success"
-              loading="lazy"
-              allowtransparency="true"
-              referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-          </div>
-
-          <div class="t-cta" style="margin-top:14px">
-            <a href="https://feminine-dating-results.start.page/" target="_blank" rel="noopener">View All Success Stories →</a>
-          </div>
-        </div>
-      </section>
-
+<!-- BONUS BOX (NEW) -->
+<div class="bonus-box" id="bonus-box">
+  <div class="bonus-top">
+    <div class="bonus-title">Bonus: Start now (before 22.01) 💗</div>
+    <div class="bonus-timer" aria-label="Bonus timer">
+      <span class="label">Bonus ends in</span>
+      <span id="bonus-countdown">Loading…</span>
     </div>
   </div>
 
-  <footer>
-    Offer closes on 25 January at 23:59 CET 💜
-  </footer>
+  <div class="bonus-sub">
+    We officially start on 22.01
+  </div>
 
-  <script src="https://player.vimeo.com/api/player.js"></script>
-  <script>
-    // Main offer: 25 January 2026, 23:59 CET = 22:59 UTC (CET is UTC+1)
-    const EXPIRY_UTC_MS = Date.UTC(2026, 0, 25, 22, 59, 0);
+  <ul class="bonus-list">
+    <li>Fly on the wall in the current Get Married in 1 Year</li>
+    <li>2 Telegram VIP days</li>
+    <li>+ 2 Group Calls for personalised support</li>
+  </ul>
 
-    // Bonus: 14 December 2025, 23:59 CET = 22:59 UTC
-    const BONUS_EXPIRY_UTC_MS = Date.UTC(2025, 11, 14, 22, 59, 0);
+  <div class="bonus-foot">
+    Bonus expires on 14.12 at 23:59 CET.
+  </div>
+</div>
 
-    const $count = document.getElementById('countdown');
-    const $bonusCount = document.getElementById('bonus-countdown');
-    const $bonusBox = document.getElementById('bonus-box');
+<!-- OFFERS / TIERS -->
+<section class="tiers" id="cta-live">
 
-    const $overlay = document.getElementById('expired-overlay');
-    const $offersWrapper = document.getElementById('offers-wrapper');
-    const $revealBtn = document.getElementById('reveal-btn');
-    const $iframe = document.getElementById('vimeo-iframe');
+  <!-- Platinum -->
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+      <h2 style="margin:0;">Get Married in 1 Year – Platinum</h2>
+      <span class="badge">Special offer - 6 Months</span>
+    </div>
 
-    let player;
-    try { player = new Vimeo.Player($iframe); } catch(e){}
+    <p class="subtitle">6 months of premium, high-touch support — double the time, depth, and integration for women committed to a 2026 marriage.</p>
 
-    function pad2(n){ return String(n).padStart(2,'0'); }
-    function formatRemaining(ms){
-      if(ms <= 0) return '00d 00h 00m 00s';
-      const s = Math.floor(ms/1000);
-      const d = Math.floor(s/86400);
-      const h = Math.floor((s%86400)/3600);
-      const m = Math.floor((s%3600)/60);
-      const sec = s%60;
-      return pad2(d)+'d '+pad2(h)+'h '+pad2(m)+'m '+pad2(sec)+'s';
-    }
+    <div class="why-box" style="border-color:#d5ccff;">
+      <strong>What you receive inside (Platinum):</strong>
+      <ul style="margin:8px 0 0 18px">
+        <li>✨ 6 months inside the VIP container</li>
+        <li>💬 24/5 Telegram support from me + married team</li>
+        <li>🎥 Extended LIVE coaching across a longer season</li>
+        <li>❤️ Vetting men over time (patterns, not moments)</li>
+        <li>🌸 Access to 10 Feminine Dating frameworks</li>
+      </ul>
+    </div>
 
-    function tick(){
-      const now = Date.now();
+    <p style="margin:0;color:var(--muted);font-size:13px;">
+      Special price until <strong>25.01. at 23:59 CET</strong> – instead of €4,444 or 6 × €822.
+    </p>
 
-      // main countdown
-      const remaining = EXPIRY_UTC_MS - now;
-      const expired = remaining <= 0;
+    <div class="cta-row">
+      <a class="btn platinum" href="https://feminine-dating.thrivecart.com/get-married-p6/" target="_blank" rel="noopener">
+        €4,000 Pay in EUR →
+      </a>
+      <a class="btn" href="https://feminine-dating.thrivecart.com/get-married-p6/" target="_blank" rel="noopener">
+        6 × €744 Monthly →
+      </a>
+    </div>
 
-      if(expired){
-        $count.textContent = '00d 00h 00m 00s';
-        $overlay.style.display = 'flex';
-        $offersWrapper.style.display = 'none';
-        $revealBtn.disabled = true;
+    <div class="cta-row">
+      <a class="btn gold" href="https://feminine-dating.thrivecart.com/get-married-usd/" target="_blank" rel="noopener">
+        $4,700 Pay in USD Dollars →
+      </a>
+      <a class="btn" href="https://feminine-dating.thrivecart.com/get-married-usd/" target="_blank" rel="noopener">
+        4 × $888 Monthly in USD Dollars →
+      </a>
+    </div>
+  </div>
 
-        if(player){
-          player.pause().catch(()=>{}).finally(()=>{ if(player.unload) player.unload(); });
-        }
-      } else {
-        $count.textContent = formatRemaining(remaining);
-      }
-
-      // bonus countdown
-      if($bonusCount && $bonusBox){
-        const bRemain = BONUS_EXPIRY_UTC_MS - now;
-        if(bRemain <= 0){
-          $bonusCount.textContent = '00d 00h 00m 00s';
-          // Hide bonus box after expiration (clean + honest)
-          $bonusBox.style.display = 'none';
-        } else {
-          $bonusCount.textContent = formatRemaining(bRemain);
-        }
-      }
-    }
-
-    $revealBtn.addEventListener('click', () => {
-      if(Date.now() > EXPIRY_UTC_MS) return;
-      $offersWrapper.style.display = 'block';
-      window.scrollTo({ top: $offersWrapper.offsetTop - 16, behavior: 'smooth' });
-    });
-
-    tick();
-    setInterval(tick, 1000);
-  </script>
-</body>
-</html>
+</section>
