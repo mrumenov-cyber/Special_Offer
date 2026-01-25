@@ -456,7 +456,7 @@
     const EXPIRY_UTC_MS = Date.UTC(2026, 0, 25, 22, 59, 0);
 
     // Bonus: 14 December 2025, 23:59 CET = 22:59 UTC
-    const BONUS_EXPIRY_UTC_MS = Date.UTC(2025, 11, 14, 22, 59, 0);
+    const EXPIRY_UTC_MS = Date.UTC(2026, 0, 25, 22, 59, 0) + (9 * 60 * 60 * 1000);
 
     const $count = document.getElementById('countdown');
     const $bonusCount = document.getElementById('bonus-countdown');
